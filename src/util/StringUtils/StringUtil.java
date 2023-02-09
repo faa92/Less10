@@ -36,21 +36,13 @@ public class StringUtil {
     }
 
     public static String getSurnameNamePatronymic(String surName, String name, String patronymic) {
-        if (surName.length() == 0 || name.length() == 0) {
-            throw new IllegalArgumentException("Некорректный ввод фамилии или имя!");
+        if (name.length() == 0 || surName.length() == 0) {
+            throw new IllegalArgumentException("Некорректные имя или фамилия");
         }
-        char[] name1 = name.toCharArray();
-        char firstLetterName = name1[0];
-        String firstLN = String.valueOf(firstLetterName);
-
-        char[] patronymic1 = patronymic.trim().toCharArray();
-        char firstLetterPatronymic = patronymic1[0];
-        String firstPatronymic = String.valueOf(firstLetterPatronymic);
-
         if (patronymic.length() != 0) {
-            return new String(surName.trim().toUpperCase() + ' ' + firstLN.trim().toUpperCase() + '.' + firstPatronymic.trim().toUpperCase() + '.');
+            return surName + " " + name.toUpperCase().charAt(0) + "." + patronymic.toUpperCase().charAt(0) + ".";
         }
-        return new String(surName.trim().toUpperCase() + ' ' + firstLN.trim().toUpperCase() + '.');
+        return surName + " " + name.toUpperCase().charAt(0) + ".";
     }
 
     public static boolean isBelarusPassport(String pas) {
@@ -70,12 +62,54 @@ public class StringUtil {
         return true;
     }
 
+    public static boolean isProtectPassword(String pass) {
+        if (pass.length() < 8) {
+            return false;
+        }
+        char[] charStrPass = pass.toCharArray();
+
+        boolean upperCase = false;
+        boolean lowerCase = false;
+        boolean nums = false;
+
+        for (char c : charStrPass) {
+            if (isLatinOrCyrillicUpperCase(c)) {
+                upperCase = true;
+            }
+            if (isLatinOrCyrillicLowerCase(c)) {
+                lowerCase = true;
+            }
+            if (Character.isDigit(c)) {
+                nums = true;
+            }
+            if (nums && lowerCase && upperCase) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isEmail(String str) {
+        if (str.contains("@") && (str.indexOf('@') == str.lastIndexOf('@')) && !str.contains(" ")) {
+            return str.indexOf('@') < str.length() - 1 && str.indexOf('@') > 0;
+        }
+        return false;
+    }
 
 
     public static boolean isLatinAndUppre(char inputChar) {
-
         return Character.isUpperCase(inputChar) && ((inputChar >= 'A' && inputChar <= 'Z') ||
                 (inputChar >= 'a' && inputChar <= 'z'));
+    }
+
+    public static boolean isLatinOrCyrillicUpperCase(char ch) {
+        return ((ch >= 'A' && ch <= 'Z') || (ch >= 'А' && ch <= 'Я')
+                || ch == 'Ё');
+    }
+
+    public static boolean isLatinOrCyrillicLowerCase(char ch) {
+        return ((ch >= 'a' && ch <= 'z') || (ch >= 'а' && ch <= 'я')
+                || ch == 'ё');
     }
 
 }

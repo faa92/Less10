@@ -38,15 +38,17 @@ public class HomeWork10 {
 
             }
             case 5 -> {
+                System.out.print("Введите пароль: ");
+                String pas = inputUser.getUserString();
+                System.out.print(StringUtil.isProtectPassword(pas));
 
             }
             case 6 -> {
-
+                System.out.print("Введите email: ");
+                String email = inputUser.getUserString();
+                System.out.println(StringUtil.isEmail(email));
             }
         }
-
-
-
 
 
     }
