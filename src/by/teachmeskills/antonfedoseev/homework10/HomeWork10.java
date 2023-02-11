@@ -1,7 +1,6 @@
 package by.teachmeskills.antonfedoseev.homework10;
 
-import by.teachmeskills.antonfedoseev.homework10.util.StringUtil;
-import by.teachmeskills.antonfedoseev.homework10.util.inputUser;
+import by.teachmeskills.antonfedoseev.homework10.util.*;
 
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ public class HomeWork10 {
                 System.out.print("Введите номер банковской карты: ");
                 String user = inputUser.getUserString();
                 System.out.println("Результат: ");
-                System.out.print(StringUtil.getProtectNumberCard(user));
+                System.out.print(CardsUtils.maskCardNumber(user));
             }
             case 3 -> {
                 System.out.print("Введите фамилию: ");
@@ -30,24 +29,24 @@ public class HomeWork10 {
                 String name = inputUser.getUserString();
                 System.out.print("Введите отчество: ");
                 String patronymic = inputUser.getUserString();
-                System.out.println("Результат: " + StringUtil.getSurnameNamePatronymic(surname, name, patronymic));
+                System.out.println("Результат: " + NameUtils.getShortFullName(surname, name, patronymic));
             }
             case 4 -> {
                 System.out.print("Введите номер паспорта: ");
                 String pas = inputUser.getUserString();
-                System.out.println(StringUtil.isBelarusPassport(pas));
+                System.out.println(PassportUtils.isValidPassportNumber(pas));
 
             }
             case 5 -> {
                 System.out.print("Введите пароль: ");
                 String pas = inputUser.getUserString();
-                System.out.print(StringUtil.isProtectPassword(pas));
+                System.out.print(PasswordUtils.isProtectPassword(pas));
 
             }
             case 6 -> {
                 System.out.print("Введите email: ");
                 String email = inputUser.getUserString();
-                System.out.println(StringUtil.isEmail(email));
+                System.out.println(EmailUtils.isEmail(email));
             }
         }
 
