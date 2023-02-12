@@ -6,7 +6,7 @@ public class EmailUtils {
 
         int atIndex = str.indexOf('@');
 
-        if ((atIndex == str.lastIndexOf('@')) && !str.contains(" ")) {
+        if (atIndex != -1 && (atIndex == str.lastIndexOf('@')) && !str.contains(" ")) {
             return atIndex < str.length() - 1 && atIndex > 0;
         }
         return false;
